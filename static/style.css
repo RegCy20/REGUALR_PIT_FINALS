@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 28px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    color: white;
+    padding: 34px;
+    border-radius: 18px;
+    margin-bottom: 22px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(255,255,255,.16);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 14px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+.formula {
+    overflow-x: auto;
+}
+
+.input-guide {
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 22px;
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+code {
+    background: #111827;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 6px;
+}
+
+.note {
+    font-size: 14px;
+    color: #374151;
+}
+
+form {
+    display: grid;
+    gap: 14px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.error {
+    margin-top: 18px;
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    overflow-x: auto;
+}
+
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #f1f5f9;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 14px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Calculator-focused layout updates */
+.hero {
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 15px;
+}
+
+.focus-card {
+    border: 2px solid #2563eb;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.16);
+}
+
+.focus-card h2 {
+    font-size: 26px;
+}
+
+.compact {
+    padding: 18px;
+}
+
+.compact h2 {
+    font-size: 21px;
+}
+
+.compact h3 {
+    font-size: 16px;
+}
+
+.compact p,
+.compact li {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.compact .formula {
+    font-size: 13px;
+}
+
+.examples {
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.result-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.results-box {
+    margin-top: 22px;
+    padding: 16px;
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    background: #eff6ff;
+}
+
+.results-box h3 {
+    color: #1d4ed8;
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adams–Moulton Predictor–Corrector Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+      window.MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main class="container">
+    <header class="hero">
+        <p class="badge">Numerical Methods PIT</p>
+        <h1>Adams–Moulton Predictor–Corrector Calculator</h1>
+        <p>
+            Main focus: use the calculator below to solve first-order ordinary differential equations
+            using an Adams–Bashforth predictor and Adams–Moulton corrector.
+        </p>
+    </header>
+
+    <section class="card compact theory">
+        <h2>Mathematical Discussion</h2>
+        <p>
+            The Adams–Moulton Predictor–Corrector method is used to approximate the
+            solution of an initial value problem:
+        </p>
+        <p class="formula">$$y' = f(x,y), \quad y(x_0)=y_0$$</p>
+        <p>
+            Because the Adams–Moulton formula is implicit, a predictor value is first
+            computed using the Adams–Bashforth method. That predicted value is then
+            substituted into the Adams–Moulton formula to obtain a corrected value.
+        </p>
+
+        <h3>Predictor Formula</h3>
+        <p class="formula">$$y_{n+1}^{p}=y_n+\frac{h}{2}(3f_n-f_{n-1})$$</p>
+
+        <h3>Corrector Formula</h3>
+        <p class="formula">$$y_{n+1}=y_n+\frac{h}{12}(5f_{n+1}^{p}+8f_n-f_{n-1})$$</p>
+
+        <p>
+            The first additional starting value is generated using RK4 so that the
+            two-step predictor-corrector formula can begin.
+        </p>
+    </section>
+
+    <section class="card compact examples">
+        <h2>Worked Example 1</h2>
+        <p><b>Problem:</b> Use the method to approximate the solution of:</p>
+        <p class="formula">$$y'=x+y,\quad y(0)=1,\quad h=0.1$$</p>
+
+        <h3>Step 1: Compute the starting values</h3>
+        <p>
+            At $x_0=0$, $y_0=1$:
+        </p>
+        <p class="formula">$$f_0=f(0,1)=0+1=1$$</p>
+        <p>
+            Using a one-step RK4 starter gives:
+        </p>
+        <p class="formula">$$y_1 \approx 1.1103417,\quad x_1=0.1$$</p>
+        <p class="formula">$$f_1=f(0.1,1.1103417)=0.1+1.1103417=1.2103417$$</p>
+
+        <h3>Step 2: Predictor</h3>
+        <p class="formula">
+            $$y_2^p=y_1+\frac{h}{2}(3f_1-f_0)$$
+            $$y_2^p=1.1103417+\frac{0.1}{2}[3(1.2103417)-1]$$
+            $$y_2^p=1.1103417+0.05(2.6310251)$$
+            $$y_2^p=1.2418930$$
+        </p>
+
+        <h3>Step 3: Corrector</h3>
+        <p class="formula">
+            $$f_2^p=f(0.2,1.2418930)=0.2+1.2418930=1.4418930$$
+            $$y_2=y_1+\frac{0.1}{12}[5(1.4418930)+8(1.2103417)-1]$$
+            $$y_2=1.1103417+0.0083333(15.8921986)$$
+            $$y_2\approx1.2427767$$
+        </p>
+    </section>
+
+    <section class="card compact examples">
+        <h2>Worked Example 2</h2>
+        <p><b>Problem:</b> Use the method to approximate the solution of:</p>
+        <p class="formula">$$y'=y-x^2+1,\quad y(0)=0.5,\quad h=0.2$$</p>
+
+        <h3>Step 1: Compute the starting values</h3>
+        <p class="formula">$$f_0=f(0,0.5)=0.5-0^2+1=1.5$$</p>
+        <p>
+            Using a one-step RK4 starter:
+        </p>
+        <p class="formula">$$y_1\approx0.8292933,\quad x_1=0.2$$</p>
+        <p class="formula">$$f_1=f(0.2,0.8292933)=0.8292933-0.2^2+1=1.7892933$$</p>
+
+        <h3>Step 2: Predictor</h3>
+        <p class="formula">
+            $$y_2^p=y_1+\frac{h}{2}(3f_1-f_0)$$
+            $$y_2^p=0.8292933+\frac{0.2}{2}[3(1.7892933)-1.5]$$
+            $$y_2^p=0.8292933+0.1(3.8678799)$$
+            $$y_2^p=1.2160813$$
+        </p>
+
+        <h3>Step 3: Corrector</h3>
+        <p class="formula">
+            $$f_2^p=f(0.4,1.2160813)=1.2160813-0.4^2+1=2.0560813$$
+            $$y_2=y_1+\frac{0.2}{12}[5(2.0560813)+8(1.7892933)-1.5]$$
+            $$y_2=0.8292933+0.0166667(23.0947539)$$
+            $$y_2\approx1.2142059$$
+        </p>
+    </section>
+
+    <section class="card calculator focus-card">
+        <h2>Interactive Calculator</h2>
+
+        <div class="input-guide">
+            <h3>Function Input Guide</h3>
+            <p>Enter functions using Python syntax. Use <code>x</code> and <code>y</code> as variables.</p>
+            <div class="guide-grid">
+                <div><b>x²</b> → <code>x**2</code></div>
+                <div><b>x³</b> → <code>x**3</code></div>
+                <div><b>sin(x)</b> → <code>sin(x)</code></div>
+                <div><b>cos(x)</b> → <code>cos(x)</code></div>
+                <div><b>eˣ</b> → <code>exp(x)</code></div>
+                <div><b>√x</b> → <code>sqrt(x)</code></div>
+            </div>
+
+            <p><b>Examples:</b></p>
+            <div class="example-tags">
+                <code>x + y</code>
+                <code>y - x**2 + 1</code>
+                <code>sin(x) + y</code>
+                <code>exp(x) - y</code>
+            </div>
+            <p class="note">Important: use <code>**</code> for exponents, not <code>^</code>.</p>
+        </div>
+
+        <form method="POST">
+            <label>Function $f(x,y)$</label>
+            <input type="text" name="expr" value="{{ values.expr }}" placeholder="Example: y - x**2 + 1">
+
+            <div class="form-row">
+                <div>
+                    <label>Initial x₀</label>
+                    <input type="number" step="any" name="x0" value="{{ values.x0 }}">
+                </div>
+                <div>
+                    <label>Initial y₀</label>
+                    <input type="number" step="any" name="y0" value="{{ values.y0 }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label>Step size h</label>
+                    <input type="number" step="any" name="h" value="{{ values.h }}">
+                </div>
+                <div>
+                    <label>Number of steps</label>
+                    <input type="number" name="steps" value="{{ values.steps }}">
+                </div>
+            </div>
+
+            <label>Correction iterations</label>
+            <input type="number" name="corrections" value="{{ values.corrections }}">
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        <p class="result-note">After pressing <b>Calculate</b>, the result table will appear below.</p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if results %}
+            <div id="results" class="results-box">
+            <h3>Result Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>x</th>
+                        <th>y</th>
+                        <th>f(x,y)</th>
+                        <th>Predictor</th>
+                        <th>Corrector</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row.n }}</td>
+                        <td>{{ "%.6f"|format(row.x) }}</td>
+                        <td>{{ "%.6f"|format(row.y) }}</td>
+                        <td>{{ "%.6f"|format(row.f) }}</td>
+                        <td>{% if row.predictor is not none %}{{ "%.6f"|format(row.predictor) }}{% else %}-{% endif %}</td>
+                        <td>{% if row.corrector is not none %}{{ "%.6f"|format(row.corrector) }}{% else %}-{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <script>
+                document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+            </script>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <h2>Safe User Input Parsing</h2>
+        <p>
+            The calculator does not directly allow unrestricted Python execution.
+            It validates the expression using Python's AST module and only permits
+            safe mathematical operators, numbers, variables <code>x</code> and
+            <code>y</code>, and selected math functions like <code>sin</code>,
+            <code>cos</code>, <code>exp</code>, <code>sqrt</code>, and <code>log</code>.
+        </p>
+    </section>
+</main>
+</body>
+</html>
